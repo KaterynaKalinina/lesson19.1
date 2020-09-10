@@ -25,7 +25,7 @@ class List {
 
     renderItems() {
         return `
-        <ul>
+        <ul id = "todo-list">
              ${this._items.map((item) => `
              <li class='${item.state ? 'crossed' : ''}'>${item.content}</li>`
                 )
