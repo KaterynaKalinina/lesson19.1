@@ -1,11 +1,20 @@
 class List {
-    constructor() {
+    constructor(elWrapper) {
+        this.elWrapper = elWrapper;
         this._items = [];
+        this.el = document.createElement('ul');
+        this.render();
     }
 
     addItem(item) {
         this._items = [...this._items, item];
-        this.render();
+        this.el.append(item.el);
+    }
+
+    createCross() {
+        const cross = document.createElement('span');
+        cross.innerText = 'X';
+        return cross;
     }
 
     deleteItem(index) {
@@ -13,8 +22,6 @@ class List {
         el.splice(index, 1);
         this._items = el;
         this.render();
-
-        // this._items = [this._items.slice(0, index), this._items.slice(index)];
     }
 
     toggleItem(index) {
@@ -23,18 +30,32 @@ class List {
 
     }
 
-    renderItems() {
-        return `
-        <ul id = "todo-list">
-             ${this._items.map((item) => `
-             <li class='${item.state ? 'crossed' : ''}'>${item.content}</li>`
-                )
-            .join('')}
-        </ul>
-        `;
-    }
-
     render() {
-        document.body.innerHTML = this.renderItems()
+        this.elWrapper.append(this.el);
     }
 }
+
+
+
+
+
+
+    // renderItems() {
+    //     return `
+    //     <ul id = "todo-list">
+    //          ${this._items.map((item) => `
+    //          <li class='${item.state ? 'crossed' : ''}'>${item.content}</li>`
+    //             )
+    //         .join('')}
+    //     </ul>
+    //     `;
+    // }
+
+    // renderItemsByDOMMethods() {
+
+    //     this._items.forEach((item) => {
+    //         const li = document.createElement('li');
+    //         this.ul.append(li);
+    //     });
+    //     this.elWrapper.append(ul);
+    // }
