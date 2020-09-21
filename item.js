@@ -3,7 +3,7 @@ class Item {
         this.content = content;
         this.state = false;
         this._items = [];
-        this.el = document.createElement('li');
+        this.el = document.createElement('div');
         this.registerListeners();
         this.setContent(content);
     }

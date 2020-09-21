@@ -2,20 +2,30 @@ class List {
     constructor(elWrapper) {
         this.elWrapper = elWrapper;
         this._items = [];
-        this.el = document.createElement('ul');
+        this.el = document.createElement('div');
         this.render();
     }
 
     addItem(item) {
         this._items = [...this._items, item];
-        this.el.append(item.el);
+        const index = this._items.length-1;
+        const cross = new Cross();
+        const listElementWrapper = document.createElement('div');
+        listElementWrapper.append(item.el);
+        listElementWrapper.append(cross.el);
+
+        cross.el.addEventListener('click', () => {
+            this._items.splice(index);
+            listElementWrapper.remove();
+        });
+        this.el.append(listElementWrapper);
     }
 
-    createCross() {
-        const cross = document.createElement('span');
-        cross.innerText = 'X';
-        return cross;
-    }
+    // createCross() {
+    //     const cross = document.createElement('span');
+    //     cross.innerText = 'X';
+    //     return cross;
+    // }
 
     deleteItem(index) {
         const el = [...this._items];
